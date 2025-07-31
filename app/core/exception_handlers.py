@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger("uvicorn.error")
 
+
 async def generic_exception_handler(request: Request, exc: Exception):
     """
     Catch-all handler for unexpected exceptions.
@@ -21,11 +22,10 @@ async def generic_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
         content=ErrorResponse(
-            code=500,
-            message="Internal Server Error",
-            detail=str(exc)
-        ).model_dump()
+            code=500, message="Internal Server Error", detail=str(exc)
+        ).model_dump(),
     )
+
 
 async def http_exception_handler(request: Request, exc: HTTPException):
     """
@@ -44,6 +44,6 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         content=ErrorResponse(
             code=exc.status_code,
             message="HTTP Error",
-            detail=exc.detail if isinstance(exc.detail, str) else str(exc.detail)
-        ).model_dump()
+            detail=exc.detail if isinstance(exc.detail, str) else str(exc.detail),
+        ).model_dump(),
     )

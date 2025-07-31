@@ -1,6 +1,7 @@
 from app.storage.db import users
 from app.models.user import User
 
+
 class SegmentService:
     """
     Service responsible for segment operations.

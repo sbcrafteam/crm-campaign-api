@@ -1,11 +1,16 @@
 import pytest
 from fastapi import HTTPException
 from fastapi.requests import Request
-from app.core.exception_handlers import generic_exception_handler, http_exception_handler
+from app.core.exception_handlers import (
+    generic_exception_handler,
+    http_exception_handler,
+)
 from app.models.error import ErrorResponse
+
 
 class DummyRequest:
     pass
+
 
 @pytest.mark.asyncio
 async def test_generic_exception_handler():
@@ -16,6 +21,7 @@ async def test_generic_exception_handler():
     content = response.body.decode()
     assert "Internal Server Error" in content
     assert "Unexpected error" in content
+
 
 @pytest.mark.asyncio
 async def test_http_exception_handler():

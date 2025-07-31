@@ -1,7 +1,6 @@
 from app.models.campaign import Campaign
 from app.storage.db import campaigns
 
-campaign_counter = 1
 
 class CampaignService:
     """

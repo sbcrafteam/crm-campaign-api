@@ -7,11 +7,11 @@ from app.dependencies.segments import get_segment_service
 
 router = APIRouter(prefix="/segments", tags=["Segments"])
 
-@router.get(
-    "/{segment_id}/users",
-    response_model=List[User]
-)
-def get_users_by_segment(segment_id: int, service: SegmentService = Depends(get_segment_service)) -> List[User]:
+
+@router.get("/{segment_id}/users", response_model=List[User])
+def get_users_by_segment(
+    segment_id: int, service: SegmentService = Depends(get_segment_service)
+) -> List[User]:
     """
     Retrieve all users for a specific segment.
 
@@ -29,7 +29,7 @@ def get_users_by_segment(segment_id: int, service: SegmentService = Depends(get_
             detail=ErrorResponse(
                 code=404,
                 message="No users found for segment",
-                detail=f"Segment ID {segment_id} returned no results"
-            ).model_dump()
+                detail=f"Segment ID {segment_id} returned no results",
+            ).model_dump(),
         )
     return users
